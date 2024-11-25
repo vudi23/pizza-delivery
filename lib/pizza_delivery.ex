@@ -1,4 +1,20 @@
 defmodule PizzaDelivery do
+  @type order :: %{
+          :name => String.t(),
+          :cost => float(),
+          :ordered_at => String.t(),
+          :delivered_at => String.t()
+        }
+
+  @type late_order :: %{
+          :name => String.t(),
+          :cost => float(),
+          :ordered_at => String.t(),
+          :delivered_at => String.t(),
+          :minutes_late => integer()
+        }
+
+  @spec find_late_pizzas([order]) :: [late_order]
   def find_late_pizzas(orders) do
     Enum.reduce(orders, [], fn order, late_orders ->
       delivery_time = calculate_delivery_time(order)
